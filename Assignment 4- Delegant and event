@@ -1,0 +1,42 @@
+using System;
+
+
+class Button
+{
+    
+    public delegate void ButtonClickHandler();
+
+  
+    public event ButtonClickHandler Click;
+
+    
+    public void PressButton()
+    {
+        Console.WriteLine("Button Pressed!");
+
+        if (Click != null)
+        {
+            Click();
+        }
+    }
+}
+
+class Program
+{
+    
+    static void ShowMessage()
+    {
+        Console.WriteLine("Event Received: Button was clicked.");
+    }
+
+    static void Main(string[] args)
+    {
+        Button btn = new Button();
+
+        // Subscribe to the event
+        btn.Click += ShowMessage;
+
+        // Raise the event
+        btn.PressButton();
+    }
+}
